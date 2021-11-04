@@ -1,1 +1,16 @@
-// TODO
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0 auto;
+  max-width: 720px;
+
+  div {
+    padding-top: 1.25rem;
+    padding-left: 1.25rem;
+  }
+  :hover {
+    cursor: pointer;
+  }
+
+}
