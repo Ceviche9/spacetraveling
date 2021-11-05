@@ -6,7 +6,7 @@
 
 ![113493479-eceeda80-94b5-11eb-94ea-59e50e56a31f](https://user-images.githubusercontent.com/83431609/140555145-18d008da-d651-4526-871e-2553bad4cd07.png)
 
-## Sobre o projeto
+## 📖 Sobre o projeto
 
 O projeto tem como objetivo o estudo e desenvolvimento de uma aplicação em ReactJS com NextJS para listagem de posts de um blog. A aplicação foi desenvolvida utilizando o framework NextJS aplicando os conceitos de Static Site Generation (SSG) e utilizando Prismic CMS para adição e gerenciamento do conteúdo dos posts.
 
@@ -28,7 +28,7 @@ https://user-images.githubusercontent.com/83431609/140560936-b8dfdb2b-601c-436a-
 * Integração com o sistema de Preview do Prismic, onde é possível ver um post não publicado dentro do blog, antes mesmo dele ir ao ar.
 * Uso do sistema estático do Next.js, onde os posts são mantidos no cache para um melhor carregamento.
 
-## Testes
+## 🏃🏾 Testes
 
 Para está completo, o projeto deve passar pelos seguintes testes quando é entregue na plataforma da rocketseat:
 
