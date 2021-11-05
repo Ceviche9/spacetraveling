@@ -11,6 +11,7 @@ import {
   AiOutlineUser as UserIcon,
 } from 'react-icons/ai';
 import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import { useState } from 'react';
 import { setTimeout } from 'timers';
 import { getPrismicClient } from '../services/prismic';
@@ -53,8 +54,9 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
           const newPosts = (await data).results.map((post: Post) => ({
             uid: post.uid,
             first_publication_date: format(
-              Date.parse(post.first_publication_date),
-              'dd MMM yyyy'
+              new Date(post.first_publication_date),
+              'dd MMM yyyy',
+              { locale: ptBR }
             ),
             data: {
               title: post.data.title,
@@ -71,7 +73,7 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
           alert('Erro na aplicação!');
         }
       }
-    }, 1500);
+    }, 200);
   };
 
   const handleLoadPostsClick = (): void => {
@@ -92,7 +94,12 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
                 <p>{post.data.subtitle}</p>
                 <div>
                   <p>
-                    <CalendarIcon /> {post.first_publication_date}
+                    <CalendarIcon />{' '}
+                    {format(
+                      new Date(post.first_publication_date),
+                      'dd MMM yyyy',
+                      { locale: ptBR }
+                    )}
                   </p>
                   <p>
                     <UserIcon /> {post.data.author}
@@ -121,18 +128,14 @@ export const getStaticProps: GetStaticProps = async () => {
   const postsResponse = await prismic.query(
     [Prismic.Predicates.at('document.type', 'post')],
     {
-      fetch: ['document.title', 'document.subtitle'],
       pageSize: 2,
     }
   );
 
-  const results = postsResponse.results.map(post => {
+  const posts = postsResponse.results.map(post => {
     return {
       uid: post.uid,
-      first_publication_date: format(
-        Date.parse(post.first_publication_date),
-        'dd MMM yyyy'
-      ),
+      first_publication_date: post.first_publication_date,
       data: {
         title: post.data.title,
         subtitle: post.data.subtitle,
@@ -141,8 +144,12 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   });
 
-  const postsPagination = { results, next_page: postsResponse.next_page };
+  const postsPagination = {
+    next_page: postsResponse.next_page,
+    results: posts,
+  };
   return {
     props: { postsPagination },
+    revalidate: 60 * 30,
   };
 };
