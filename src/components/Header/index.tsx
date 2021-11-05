@@ -7,12 +7,9 @@ export const Header = (): JSX.Element => {
   return (
     <header className={styles.headerContainer}>
       <Link href="/">
-        <Image
-          src="/images/Logo.svg"
-          alt="Logo do spacetraveling"
-          width={238}
-          height={25}
-        />
+        <a>
+          <Image src="/images/Logo.svg" alt="logo" width={238} height={25} />
+        </a>
       </Link>
     </header>
   );

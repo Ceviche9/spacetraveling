@@ -4,44 +4,72 @@
   padding: 0 2rem;
 
   img {
+    margin-top: 1rem;
     max-width: 1120px;
   }
 }
 
 .post {
-  margin: 2rem auto;
+  margin: 1rem auto;
   max-width: 720px;
 
   h1 {
-    font-size: 2.5rem;
+    color: var(--Heading);
+    font-size: 2rem;
     text-align: center;
     font-weight: bold;
   }
 }
 
 .info{
-  margin: 0.5rem auto;
-  padding-right: 12rem;
+  margin: 0.2rem auto;
   display: flex;
+  align-items: center;
   justify-content: center;
   flex-direction: row;
-  gap: 2.2rem;
+  gap: 2rem;
 
   p, time {
     font-size: 1rem;
   }
 }
+
 .postContent{
   margin-top: 2rem;
   line-height: 2rem;
-  font-size: 1rem;
+  font-size: 1.125rem;
+
+  color: var(--Body);
 
   h2 {
-    margin-left: 2.5rem;
-    margin-top: 1.5rem;
+    color: var(--Heading)
   }
-  p {
-    margin-top: 1rem;
-    margin-left: 2.5rem;
+
+  p, ul {
+    margin: 1.5rem 0;
   }
+
+  ul {
+    padding-left: 1.5rem;
+
+    li {
+      margin: 0.5rem 0;
+    }
+  }
+
+  pre {
+    padding-left: 1rem;
+    border-left: 3px solid var(--Highlight);
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
+  }
+
 }

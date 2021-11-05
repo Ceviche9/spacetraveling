@@ -2,9 +2,23 @@
   max-width: 1120px;
   margin: 3rem 25% 0;
 
-  h4 {
+  button {
+    border: 0;
+    font-weight: bold;
+    background: transparent;
     margin-top: 2rem;
-    color: var(--Highlight);
+
+    p {
+      color: var(--Highlight);
+      transition: color 0.5s;
+
+    }
+
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.7);
+    }
   }
 
 }
@@ -36,18 +50,10 @@
 
     div {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       flex-direction: row;
       gap: 1rem;
-
-      time {
-        margin-top: 0.5rem;
-        font-size: 1rem;
-        display: flex;
-        align-items: center;
-        color: var(--Info);
-      }
-
+      color: var(--info);
     }
 
     &:hover h1 {

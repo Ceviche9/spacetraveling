@@ -1,6 +1,4 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable no-nested-ternary */
 import { GetStaticProps } from 'next';
 
 import Head from 'next/head';
@@ -13,7 +11,10 @@ import {
   AiOutlineUser as UserIcon,
 } from 'react-icons/ai';
 import { format } from 'date-fns';
+import { useState } from 'react';
+import { setTimeout } from 'timers';
 import { getPrismicClient } from '../services/prismic';
+import { Loading } from '../components/Loading';
 
 import styles from './home.module.scss';
 
@@ -36,7 +37,48 @@ type HomeProps = {
   postsPagination: PostPagination;
 };
 
-export default function Home(props: HomeProps): JSX.Element {
+export default function Home({ postsPagination }: HomeProps): JSX.Element {
+  const { next_page, results } = postsPagination;
+  const [posts, setPosts] = useState<Post[]>(results);
+  const [nextPage, setNextPage] = useState<string>(next_page);
+  const [showLoading, setShowLoading] = useState(false);
+
+  const loadPosts = (): void => {
+    setShowLoading(true);
+    setTimeout(() => {
+      if (nextPage) {
+        fetch(nextPage)
+          .then(response => response.json())
+          .then(data => {
+            const newPosts = data.results.map((post: Post) => ({
+              uid: post.uid,
+              first_publication_date: format(
+                Date.parse(post.first_publication_date),
+                'dd MMM yyyy'
+              ),
+              data: {
+                title: post.data.title,
+                subtitle: post.data.subtitle,
+                author: post.data.author,
+              },
+            }));
+
+            setNextPage(data.next_page);
+            setPosts([...posts, ...newPosts]);
+            setShowLoading(false);
+          })
+          .catch(() => {
+            setShowLoading(false);
+            alert('Erro na aplicação!');
+          });
+      }
+    }, 1500);
+  };
+
+  const handleLoadPostsClick = (): void => {
+    loadPosts();
+  };
+
   return (
     <>
       <Head>
@@ -44,15 +86,15 @@ export default function Home(props: HomeProps): JSX.Element {
       </Head>
       <main className={styles.container}>
         <div className={styles.posts}>
-          {props.postsPagination.results.map(post => (
+          {posts.map(post => (
             <Link href={`/post/${post.uid}`} key={post.uid}>
-              <a href="">
+              <a>
                 <h1>{post.data.title}</h1>
                 <p>{post.data.subtitle}</p>
                 <div>
-                  <time>
+                  <p>
                     <CalendarIcon /> {post.first_publication_date}
-                  </time>
+                  </p>
                   <p>
                     <UserIcon /> {post.data.author}
                   </p>
@@ -61,7 +103,15 @@ export default function Home(props: HomeProps): JSX.Element {
             </Link>
           ))}
         </div>
-        <h4>Carregar mais Posts</h4>
+        {nextPage ? (
+          showLoading ? (
+            <Loading type="bubbles" color="#FF57B2" />
+          ) : (
+            <button type="button" onClick={handleLoadPostsClick}>
+              <p>Carregar mais posts</p>
+            </button>
+          )
+        ) : null}
       </main>
     </>
   );
@@ -73,7 +123,7 @@ export const getStaticProps: GetStaticProps = async () => {
     [Prismic.Predicates.at('document.type', 'post')],
     {
       fetch: ['document.title', 'document.subtitle'],
-      pageSize: 100,
+      pageSize: 2,
     }
   );
 

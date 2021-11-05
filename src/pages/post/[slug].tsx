@@ -1,5 +1,5 @@
+/* eslint-disable react/no-danger */
 import Head from 'next/head';
-import Image from 'next/image';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 import {
@@ -30,7 +30,9 @@ interface Post {
       body: {
         text: string;
       }[];
+      count: number;
     }[];
+    reading_time: number;
   };
 }
 
@@ -39,8 +41,6 @@ interface PostProps {
 }
 
 export default function Post({ post }: PostProps): JSX.Element {
-  console.log(post);
-
   return (
     <>
       <Head>
@@ -48,10 +48,8 @@ export default function Post({ post }: PostProps): JSX.Element {
       </Head>
       <main className={styles.container}>
         <img
-          src={post.data.banner.url}
+          src={post.data.banner?.url ?? '/images/Banner.svg'}
           alt="Banner do Post"
-          width={1440}
-          height={400}
         />
         <article className={styles.post}>
           <h1>{post.data.title}</h1>
@@ -63,14 +61,16 @@ export default function Post({ post }: PostProps): JSX.Element {
               <UserIcon /> {post.data.author}
             </p>
             <p>
-              <Clock /> 5min
+              <Clock /> {post.data.reading_time} min
             </p>
           </div>
           <div className={styles.postContent}>
             {post.data.content.map(postContent => (
               <>
                 <h2>{postContent.heading}</h2>
-                <p>{postContent.body}</p>
+                <div
+                  dangerouslySetInnerHTML={{ __html: String(postContent.body) }}
+                />
               </>
             ))}
           </div>
@@ -95,14 +95,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const prismic = getPrismicClient();
   const response = await prismic.getByUID('post', String(slug), {});
 
+  let count = 0;
+
   const content = response.data.content.map(contentData => {
+    count += RichText.asHtml(contentData.body).length;
     return {
       heading: contentData.heading,
-      body: RichText.asText(contentData.body),
+      body: RichText.asHtml(contentData.body),
     };
   });
-
-  console.log(response.data);
 
   const post = {
     first_publication_date: format(
@@ -120,6 +121,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       },
       author: response.data.author,
       content,
+      reading_time: Math.round(count / 200),
     },
   };
 
