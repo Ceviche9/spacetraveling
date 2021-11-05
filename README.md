@@ -1,13 +1,10 @@
-# Space Traveling
-
-![113493479-eceeda80-94b5-11eb-94ea-59e50e56a31f](https://user-images.githubusercontent.com/83431609/140555145-18d008da-d651-4526-871e-2553bad4cd07.png)
-
-
 <h1 align="center">
     SpaceTraveling - Next.js
 </h1>
+
 <p align="center">Aplicação em formato de blog utilizando Prismic CMS</p>
 
+![113493479-eceeda80-94b5-11eb-94ea-59e50e56a31f](https://user-images.githubusercontent.com/83431609/140555145-18d008da-d651-4526-871e-2553bad4cd07.png)
 
 ## Sobre o projeto
 
