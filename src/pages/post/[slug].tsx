@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-return-assign */
@@ -22,6 +23,7 @@ interface Post {
   first_publication_date: string | null;
   data: {
     title: string;
+    subtitle: string;
     banner: {
       url: string;
     };
@@ -93,16 +95,19 @@ export default function Post({ post }: PostProps): JSX.Element {
               <Clock /> {`${readTime} min`}
             </p>
           </div>
-          {post.data.content.map((postContent, index) => (
-            <div key={index} className={styles.postContent}>
-              <h2>{postContent.heading}</h2>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: RichText.asHtml(postContent.body),
-                }}
-              />
-            </div>
-          ))}
+          <div className={styles.postContent}>
+            <p>{post.data.subtitle}</p>
+            {post.data.content.map((postContent, index) => (
+              <>
+                <h2 key={index}>{postContent.heading}</h2>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: RichText.asHtml(postContent.body),
+                  }}
+                />
+              </>
+            ))}
+          </div>
         </article>
       </main>
     </>
@@ -147,6 +152,7 @@ export const getStaticProps: GetStaticProps = async context => {
     first_publication_date: response.first_publication_date,
     data: {
       title: response.data.title,
+      subtitle: response.data.subtitle,
       banner: {
         url: response.data.banner.url,
       },
