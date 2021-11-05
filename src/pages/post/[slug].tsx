@@ -1,5 +1,7 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/no-danger */
 import Head from 'next/head';
+import Prismic from '@prismicio/client';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 import {
@@ -19,10 +21,6 @@ interface Post {
     title: string;
     banner: {
       url: string;
-      dimensions: {
-        width: number;
-        height: number;
-      };
     };
     author: string;
     content: {
@@ -64,16 +62,14 @@ export default function Post({ post }: PostProps): JSX.Element {
               <Clock /> {post.data.reading_time} min
             </p>
           </div>
-          <div className={styles.postContent}>
-            {post.data.content.map(postContent => (
-              <>
-                <h2>{postContent.heading}</h2>
-                <div
-                  dangerouslySetInnerHTML={{ __html: String(postContent.body) }}
-                />
-              </>
-            ))}
-          </div>
+          {post.data.content.map((postContent, index) => (
+            <div key={index} className={styles.postContent}>
+              <h2>{postContent.heading}</h2>
+              <div
+                dangerouslySetInnerHTML={{ __html: String(postContent.body) }}
+              />
+            </div>
+          ))}
         </article>
       </main>
     </>
@@ -81,11 +77,23 @@ export default function Post({ post }: PostProps): JSX.Element {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // const prismic = getPrismicClient();
-  // const posts = await prismic.query(TODO);
+  const prismic = getPrismicClient();
+  const posts = await prismic.query(
+    [Prismic.predicates.at('document.type', 'post')],
+    {
+      fetch: ['document.uid'],
+      pageSize: 2,
+    }
+  );
+
+  const postsUid = posts.results.map(post => post.uid);
+
   return {
-    paths: [],
-    fallback: 'blocking',
+    paths: [
+      { params: { slug: postsUid[0] } },
+      { params: { slug: postsUid[1] } },
+    ],
+    fallback: true,
   };
 };
 
@@ -114,10 +122,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       title: response.data.title,
       banner: {
         url: response.data.banner.url,
-        dimensions: {
-          width: response.data.banner.dimensions.width,
-          height: response.data.banner.dimensions.height,
-        },
       },
       author: response.data.author,
       content,
@@ -127,5 +131,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { post },
+    revalidate: 60 * 30, // 30 Minutos
   };
 };

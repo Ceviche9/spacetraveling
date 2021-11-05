@@ -42,7 +42,11 @@
   color: var(--Body);
 
   h2 {
-    color: var(--Heading)
+    color: var(--Heading);
+  }
+
+  strong {
+    color: var(--Highlight);
   }
 
   p, ul {

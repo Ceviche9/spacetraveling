@@ -43,34 +43,33 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
   const [nextPage, setNextPage] = useState<string>(next_page);
   const [showLoading, setShowLoading] = useState(false);
 
-  const loadPosts = (): void => {
+  const loadPosts = async (): Promise<void> => {
     setShowLoading(true);
-    setTimeout(() => {
+    setTimeout(async () => {
       if (nextPage) {
-        fetch(nextPage)
-          .then(response => response.json())
-          .then(data => {
-            const newPosts = data.results.map((post: Post) => ({
-              uid: post.uid,
-              first_publication_date: format(
-                Date.parse(post.first_publication_date),
-                'dd MMM yyyy'
-              ),
-              data: {
-                title: post.data.title,
-                subtitle: post.data.subtitle,
-                author: post.data.author,
-              },
-            }));
+        try {
+          const response = fetch(nextPage);
+          const data: Promise<PostPagination> = (await response).json();
+          const newPosts = (await data).results.map((post: Post) => ({
+            uid: post.uid,
+            first_publication_date: format(
+              Date.parse(post.first_publication_date),
+              'dd MMM yyyy'
+            ),
+            data: {
+              title: post.data.title,
+              subtitle: post.data.subtitle,
+              author: post.data.author,
+            },
+          }));
 
-            setNextPage(data.next_page);
-            setPosts([...posts, ...newPosts]);
-            setShowLoading(false);
-          })
-          .catch(() => {
-            setShowLoading(false);
-            alert('Erro na aplicação!');
-          });
+          setNextPage((await data).next_page);
+          setPosts([...posts, ...newPosts]);
+          setShowLoading(false);
+        } catch (err) {
+          setShowLoading(false);
+          alert('Erro na aplicação!');
+        }
       }
     }, 1500);
   };
