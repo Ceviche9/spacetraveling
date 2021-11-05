@@ -1,12 +1,25 @@
 # Space Traveling
+
 ![113493479-eceeda80-94b5-11eb-94ea-59e50e56a31f](https://user-images.githubusercontent.com/83431609/140555145-18d008da-d651-4526-871e-2553bad4cd07.png)
 
-## 📚 Sobre o projeto.
 
-* Esse blog foi um projeto desenvolvido durante um desafio da trilha de React do Ignite da Rocketseat! A ideia era desenvolver do zero uma aplicação, desde o front-end até a conexão com o Prismic CMS para a publicação dos posts.
+<h1 align="center">
+    SpaceTraveling - Next.js
+</h1>
+<p align="center">Aplicação em formato de blog utilizando Prismic CMS</p>
 
-&nbsp;
 
+## Sobre o projeto
+
+O projeto tem como objetivo o estudo e desenvolvimento de uma aplicação em ReactJS com NextJS para listagem de posts de um blog. A aplicação foi desenvolvida utilizando o framework NextJS aplicando os conceitos de Static Site Generation (SSG) e utilizando Prismic CMS para adição e gerenciamento do conteúdo dos posts.
+
+O projeto foi desenvolvido como desafio das aulas do modulo 03 do [Ignite da Rocketseat](https://rocketseat.com.br/)
+
+Link do [desafio](https://www.notion.so/Desafio-01-Criando-um-projeto-do-zero-b1a3645d286b4eec93f5f1f5476d0ff7)
+
+Link do [desafio complementar](https://www.notion.so/Desafio-02-Adicionando-features-ao-blog-d466866c02544c79bbada9717c033d0a)
+
+---
 
 https://user-images.githubusercontent.com/83431609/140560936-b8dfdb2b-601c-436a-90b1-72f86c89b71d.mp4
 
