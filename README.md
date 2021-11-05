@@ -1,7 +1,7 @@
 # Space Traveling
 ![113493479-eceeda80-94b5-11eb-94ea-59e50e56a31f](https://user-images.githubusercontent.com/83431609/140555145-18d008da-d651-4526-871e-2553bad4cd07.png)
 
-## 📚 Informações sobre o projeto
+## 📚 Sobre o projeto.
 
 * Esse blog foi um projeto desenvolvido durante um desafio da trilha de React do Ignite da Rocketseat! A ideia era desenvolver do zero uma aplicação, desde o front-end até a conexão com o Prismic CMS para a publicação dos posts.
 
@@ -15,7 +15,7 @@
 * Uso do sistema estático do Next.js, onde os posts são mantidos no cache para um melhor carregamento.
 
 
-## 🛠️ Tecnologias/Ferramentas ultilizadas
+## 🛠️ Tecnologias.
 
 * [React](https://pt-br.reactjs.org/E)
 * [Next.js](https://nextjs.org/)
@@ -25,7 +25,7 @@
 
 
 
-## 📝 Licença
+## 📝 Licença.
 
 Este projeto está licenciado sob a Licença MIT. Veja o arquivo de [LICENÇA](https://github.com/GBDev13/space-traveling/blob/master/LICENSE) para detalhes.
 
