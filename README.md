@@ -30,21 +30,21 @@ https://user-images.githubusercontent.com/83431609/140560936-b8dfdb2b-601c-436a-
 
 ## Testes
 
-Para está completo, o projeto deve passar pelos seguintes testes :
+Para está completo, o projeto deve passar pelos seguintes testes quando é entregue na plataforma da rocketseat:
 
-- Header should be able to render logo
-- Header should be able to navigate to home page after a click
-- Post should be able to return prismic posts documents paths using getStaticPaths
-- Post should be able to return prismic post document using getStaticProps
-- Post should be able to render post document info
-- Post should be able to render loading message if fallback
-- Home should be able to return prismic posts documents using getStaticProps
-- Home should be able to render posts documents info
-- Home should be able to navigate to post page after a click
-- Home should be able to load more posts if available
-- Home should not be able to load more posts if not available
+- [x] Header should be able to render logo
+- [x] Header should be able to navigate to home page after a click
+- [x] Post should be able to return prismic posts documents paths using getStaticPaths
+- [x] Post should be able to return prismic post document using getStaticProps
+- [x] Post should be able to render post document info
+- [x] Post should be able to render loading message if fallback
+- [x] Home should be able to return prismic posts documents using getStaticProps
+- [x] Home should be able to render posts documents info
+- [x] Home should be able to navigate to post page after a click
+- [x] Home should be able to load more posts if available
+- [x] Home should not be able to load more posts if not available
 
-Todos os testes acima são feitos automaticamentes quando o desafio é entregue na plataforma da rocketseat:
+Resultado do Projeto:
 
 ![image](https://user-images.githubusercontent.com/83431609/140582264-1d732358-8519-4fd1-ab06-16239004d8d4.png)
 
