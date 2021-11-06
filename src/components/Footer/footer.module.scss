@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin: 0 auto;
+
+  a {
+    margin-top: 3rem;
+    font-size: 0.65rem;
+    color: var(--Heading);
+    transition: color 0.5s;
+  }
+
+  div {
+    cursor: pointer;
+    margin-top: 3.1rem;
+    padding-left: 0.2rem;
+  }
+
+  &:hover a {
+    color: var(--Highlight);
+  }
+}
