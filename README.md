@@ -1,12 +1,22 @@
-# Space Traveling
+<h1 align="center">
+    SpaceTraveling - Next.js
+</h1>
+
+<p align="center">Aplicação em formato de blog utilizando Prismic CMS</p>
+
 ![113493479-eceeda80-94b5-11eb-94ea-59e50e56a31f](https://user-images.githubusercontent.com/83431609/140555145-18d008da-d651-4526-871e-2553bad4cd07.png)
 
-## 📚 Sobre o projeto.
+## 📖 Sobre o projeto
 
-* Esse blog foi um projeto desenvolvido durante um desafio da trilha de React do Ignite da Rocketseat! A ideia era desenvolver do zero uma aplicação, desde o front-end até a conexão com o Prismic CMS para a publicação dos posts.
+O projeto tem como objetivo o estudo e desenvolvimento de uma aplicação em ReactJS com NextJS para listagem de posts de um blog. A aplicação foi desenvolvida utilizando o framework NextJS aplicando os conceitos de Static Site Generation (SSG) e utilizando Prismic CMS para adição e gerenciamento do conteúdo dos posts.
 
-&nbsp;
+O projeto foi desenvolvido como desafio das aulas do modulo 03 do [Ignite da Rocketseat](https://rocketseat.com.br/)
 
+Link do [desafio](https://www.notion.so/Desafio-01-Criando-um-projeto-do-zero-b1a3645d286b4eec93f5f1f5476d0ff7)
+
+Link do [desafio complementar](https://www.notion.so/Desafio-02-Adicionando-features-ao-blog-d466866c02544c79bbada9717c033d0a)
+
+---
 
 https://user-images.githubusercontent.com/83431609/140560936-b8dfdb2b-601c-436a-90b1-72f86c89b71d.mp4
 
@@ -18,6 +28,25 @@ https://user-images.githubusercontent.com/83431609/140560936-b8dfdb2b-601c-436a-
 * Integração com o sistema de Preview do Prismic, onde é possível ver um post não publicado dentro do blog, antes mesmo dele ir ao ar.
 * Uso do sistema estático do Next.js, onde os posts são mantidos no cache para um melhor carregamento.
 
+## 🏃🏾 Testes
+
+Para está completo, o projeto deve passar pelos seguintes testes quando é entregue na plataforma da rocketseat:
+
+- [x] Header should be able to render logo
+- [x] Header should be able to navigate to home page after a click
+- [x] Post should be able to return prismic posts documents paths using getStaticPaths
+- [x] Post should be able to return prismic post document using getStaticProps
+- [x] Post should be able to render post document info
+- [x] Post should be able to render loading message if fallback
+- [x] Home should be able to return prismic posts documents using getStaticProps
+- [x] Home should be able to render posts documents info
+- [x] Home should be able to navigate to post page after a click
+- [x] Home should be able to load more posts if available
+- [x] Home should not be able to load more posts if not available
+
+Resultado do Projeto:
+
+![image](https://user-images.githubusercontent.com/83431609/140582264-1d732358-8519-4fd1-ab06-16239004d8d4.png)
 
 ## 🛠️ Tecnologias.
 
