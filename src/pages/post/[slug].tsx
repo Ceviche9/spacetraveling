@@ -130,7 +130,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false, // TODO: ao deixar como true dá erro na build.
+    fallback: 'blocking', // TODO: ao deixar como true dá erro na build.
   };
 };
 
