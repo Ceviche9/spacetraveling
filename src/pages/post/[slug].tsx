@@ -1,6 +1,5 @@
 /* eslint-disable react/no-danger */
 /* eslint-disable no-param-reassign */
-/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-return-assign */
 import Head from 'next/head';
 import Prismic from '@prismicio/client';
@@ -20,6 +19,7 @@ import { getPrismicClient } from '../../services/prismic';
 import styles from './post.module.scss';
 
 interface Post {
+  uid: string;
   first_publication_date: string | null;
   data: {
     title: string;
@@ -97,9 +97,9 @@ export default function Post({ post }: PostProps): JSX.Element {
           </div>
           <div className={styles.postContent}>
             <p>{post.data.subtitle}</p>
-            {post.data.content.map((postContent, index) => (
+            {post.data.content.map(postContent => (
               <>
-                <h2 key={index}>{postContent.heading}</h2>
+                <h2 key={post.uid}>{postContent.heading}</h2>
                 <div
                   dangerouslySetInnerHTML={{
                     __html: RichText.asHtml(postContent.body),
@@ -130,7 +130,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false, // TODO: ao deixar como true dá erro na build.
   };
 };
 
