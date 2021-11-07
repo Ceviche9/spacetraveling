@@ -89,7 +89,7 @@ export default function Post({ post }: PostProps): JSX.Element {
               <CalendarIcon /> {formatedDate}
             </time>
             <p>
-              <UserIcon /> {post.data.author}
+              <UserIcon /> {post.data?.author ?? 'Tundê Cavalcante'}
             </p>
             <p>
               <Clock /> {`${readTime} min`}
