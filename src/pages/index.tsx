@@ -14,6 +14,7 @@ import {
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { setTimeout } from 'timers';
 import { getPrismicClient } from '../services/prismic';
 import { Loading } from '../components/Loading';
@@ -45,6 +46,20 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
   const [nextPage, setNextPage] = useState<string>(next_page);
   const [showLoading, setShowLoading] = useState(false);
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const notifyError = (err: string) => {
+    console.log('fui chamado');
+    toast.error(err, {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   const loadPosts = async (): Promise<void> => {
     setShowLoading(true);
     setTimeout(async () => {
@@ -71,7 +86,8 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
           setShowLoading(false);
         } catch (err) {
           setShowLoading(false);
-          alert('Erro na aplicação!');
+          // TODO: Não funciona.
+          notifyError('Um erro ocorreu ao tentar carregar mais posts!');
         }
       }
     }, 200);
