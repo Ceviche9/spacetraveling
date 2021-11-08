@@ -48,7 +48,6 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const notifyError = (err: string) => {
-    console.log('fui chamado');
     toast.error(err, {
       position: 'top-right',
       autoClose: 5000,
