@@ -8,9 +8,9 @@
 
 ## 📖 Sobre o projeto
 
-O projeto tem como objetivo o estudo e desenvolvimento de uma aplicação em ReactJS com NextJS para listagem de posts de um blog. A aplicação foi desenvolvida utilizando o framework NextJS aplicando os conceitos de Static Site Generation (SSG) e utilizando Prismic CMS para adição e gerenciamento do conteúdo dos posts.
+O projeto tem como objetivo o estudo e desenvolvimento de uma aplicação em ReactJS com NextJS para listagem de posts de um blog. A aplicação foi desenvolvida utilizando o framework NextJS aplicando os conceitos de Static Site Generation (SSG) e utilizando Prismic CMS para adição e gerenciamento do conteúdo dos posts. O projeto foi desenvolvido como desafio das aulas do modulo 03 do [Ignite da Rocketseat](https://rocketseat.com.br/), porém ainda utilizo como blog para postar alguns artigos/tutoriais.
 
-O projeto foi desenvolvido como desafio das aulas do modulo 03 do [Ignite da Rocketseat](https://rocketseat.com.br/)
+Link do [Projeto](https://spacetraveling-tun.vercel.app/)
 
 Link do [desafio](https://www.notion.so/Desafio-01-Criando-um-projeto-do-zero-b1a3645d286b4eec93f5f1f5476d0ff7)
 
@@ -18,7 +18,7 @@ Link do [desafio complementar](https://www.notion.so/Desafio-02-Adicionando-feat
 
 ---
 
-https://user-images.githubusercontent.com/83431609/140560936-b8dfdb2b-601c-436a-90b1-72f86c89b71d.mp4
+![image](https://user-images.githubusercontent.com/83431609/140818662-c6eedbb8-055e-4496-b061-a80a87860159.png)
 
 
 ## 💻 O que tem no projeto?
