@@ -2,6 +2,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-return-assign */
 import Head from 'next/head';
+import Link from 'next/link';
 import Prismic from '@prismicio/client';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -23,6 +24,7 @@ import styles from './post.module.scss';
 interface Post {
   uid: string;
   first_publication_date: string | null;
+  last_publication_date: string | null;
   data: {
     title: string;
     subtitle: string;
@@ -42,9 +44,23 @@ interface Post {
 
 interface PostProps {
   post: Post;
+  sugestions: {
+    prevPost?: {
+      uid: string;
+      data: {
+        title: string;
+      };
+    }[];
+    nextPost?: {
+      uid: string;
+      data: {
+        title: string;
+      };
+    }[];
+  };
 }
 
-export default function Post({ post }: PostProps): JSX.Element {
+export default function Post({ post, sugestions }: PostProps): JSX.Element {
   const router = useRouter();
 
   const totalWords = post.data.content.reduce((total, contentItem) => {
@@ -62,9 +78,17 @@ export default function Post({ post }: PostProps): JSX.Element {
   }, 0);
 
   const readTime = Math.ceil(totalWords / 200);
-  const formatedDate = format(
+  const firstPublicationDate = format(
     new Date(post.first_publication_date),
     'dd MMM yyyy',
+    {
+      locale: ptBR,
+    }
+  );
+
+  const lastPublicationDate = format(
+    new Date(post.last_publication_date),
+    "'*editado em' dd MMM yyyy, 'às' H':'m",
     {
       locale: ptBR,
     }
@@ -88,7 +112,7 @@ export default function Post({ post }: PostProps): JSX.Element {
           <h1>{post.data.title}</h1>
           <div className={styles.info}>
             <time>
-              <CalendarIcon /> {formatedDate}
+              <CalendarIcon /> {firstPublicationDate}
             </time>
             <p>
               <UserIcon /> {post.data?.author ?? 'Tundê Cavalcante'}
@@ -97,6 +121,7 @@ export default function Post({ post }: PostProps): JSX.Element {
               <Clock /> {`${readTime} min`}
             </p>
           </div>
+          <span>{lastPublicationDate}</span>
           <div className={styles.postContent}>
             <p>{post.data.subtitle}</p>
             {post.data.content.map(postContent => (
@@ -111,6 +136,24 @@ export default function Post({ post }: PostProps): JSX.Element {
             ))}
           </div>
         </article>
+        <section className={styles.sugestions}>
+          {sugestions.prevPost[0] ? (
+            <div>
+              <p>{sugestions.prevPost[0].data.title}</p>
+              <Link href={`/post/${sugestions.prevPost[0].uid}`}>
+                <a>Post anterior</a>
+              </Link>
+            </div>
+          ) : null}
+          {sugestions.nextPost[0] ? (
+            <div>
+              <p>{sugestions.nextPost[0].data.title}</p>
+              <Link href={`/post/${sugestions.nextPost[0].uid}`}>
+                <a>Próximo post</a>
+              </Link>
+            </div>
+          ) : null}
+        </section>
       </main>
       <Comments />
     </>
@@ -143,6 +186,24 @@ export const getStaticProps: GetStaticProps = async context => {
   const prismic = getPrismicClient();
   const response = await prismic.getByUID('post', String(slug), {});
 
+  const nextPost = await prismic.query(
+    [Prismic.Predicates.at('document.type', 'post')],
+    {
+      pageSize: 1,
+      after: response.id,
+      orderings: '[document.first_publication_date]',
+    }
+  );
+
+  const prevPost = await prismic.query(
+    [Prismic.Predicates.at('document.type', 'post')],
+    {
+      pageSize: 1,
+      after: response.id,
+      orderings: '[document.last_publication_date desc]',
+    }
+  );
+
   const content = response.data.content.map(contentData => {
     return {
       heading: contentData.heading,
@@ -153,6 +214,7 @@ export const getStaticProps: GetStaticProps = async context => {
   const post = {
     uid: response.uid,
     first_publication_date: response.first_publication_date,
+    last_publication_date: response.last_publication_date,
     data: {
       title: response.data.title,
       subtitle: response.data.subtitle,
@@ -164,8 +226,13 @@ export const getStaticProps: GetStaticProps = async context => {
     },
   };
 
+  const sugestions = {
+    prevPost: prevPost?.results,
+    nextPost: nextPost?.results,
+  };
+
   return {
-    props: { post },
+    props: { post, sugestions },
     revalidate: 60 * 30, // 30 Minutos
   };
 };
