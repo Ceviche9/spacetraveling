@@ -77,3 +77,20 @@
   }
 
 }
+
+
+@media(max-width: 720px) {
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 0.5rem;
+
+    img {
+      margin-top: 1rem;
+      width: 420px;
+      height: 150px;
+    }
+  }
+
+}
+
