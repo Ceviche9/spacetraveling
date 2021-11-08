@@ -62,3 +62,12 @@
 
   }
 }
+
+
+@media(max-width: 720px) {
+  .container {
+    max-width: 720px;
+    margin: 3rem 10% 0;
+
+  }
+}
