@@ -16,6 +16,8 @@ import { RichText } from 'prismic-dom';
 import { useRouter } from 'next/router';
 import { getPrismicClient } from '../../services/prismic';
 
+import Comments from '../../components/Comments';
+
 import styles from './post.module.scss';
 
 interface Post {
@@ -110,6 +112,7 @@ export default function Post({ post }: PostProps): JSX.Element {
           </div>
         </article>
       </main>
+      <Comments />
     </>
   );
 }
