@@ -155,7 +155,7 @@ export default function Post({ post, sugestions }: PostProps): JSX.Element {
           ) : null}
         </section>
       </main>
-      <Comments />
+      <Comments sugestions={sugestions} />
     </>
   );
 }

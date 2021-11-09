@@ -1,28 +1,47 @@
+/* eslint-disable consistent-return */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable class-methods-use-this */
-import { Component } from 'react';
+import { useEffect } from 'react';
 
-export default class Comments extends Component {
-  componentDidMount() {
+const commentNodeId = 'comments';
+
+export type CommentsProps = {
+  sugestions: {
+    prevPost?: {
+      uid: string;
+      data: {
+        title: string;
+      };
+    }[];
+    nextPost?: {
+      uid: string;
+      data: {
+        title: string;
+      };
+    }[];
+  };
+};
+
+const Comments = ({ sugestions }: CommentsProps): JSX.Element => {
+  console.log('Teste', sugestions);
+  useEffect(() => {
     const script = document.createElement('script');
-    const anchor = document.getElementById('inject-comments-for-uterances');
-    script.setAttribute('src', 'https://utteranc.es/client.js');
-    script.setAttribute('crossorigin', 'anonymous');
-    script.setAttribute('async', 'true');
-    script.setAttribute('repo', 'ceviche9/spacetraveling');
+    script.src = 'https://utteranc.es/client.js';
+    script.async = true;
+    script.setAttribute('repo', 'Ceviche9/spacetraveling');
     script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('label', 'Comment');
     script.setAttribute('theme', 'dark-blue');
-    anchor.appendChild(script);
-  }
+    script.setAttribute('crossorigin', 'anonymous');
+    const scriptParentNode = document.getElementById(commentNodeId);
+    scriptParentNode.appendChild(script);
+    return () => {
+      // cleanup - remove the older script with previous theme
+      scriptParentNode.removeChild(scriptParentNode.firstChild);
+    };
+  }, [sugestions]);
 
-  /* themes =>
-   github-dark-orange
-   icy-dark
-   dark-blue
-   photon-dark
-   gruvbox-dark
-  */
-  render() {
-    return <div id="inject-comments-for-uterances" />;
-  }
-}
+  return <div id={commentNodeId} />;
+};
+
+export default Comments;
