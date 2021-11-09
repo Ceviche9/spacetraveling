@@ -19,48 +19,14 @@ import { getPrismicClient } from '../../services/prismic';
 
 import Comments from '../../components/Comments';
 
+import { prismicResponseProps } from '../../protocols/postProtocols';
+
 import styles from './post.module.scss';
 
-interface Post {
-  uid: string;
-  first_publication_date: string | null;
-  last_publication_date: string | null;
-  data: {
-    title: string;
-    subtitle: string;
-    banner: {
-      url: string;
-    };
-    author: string;
-    content: {
-      heading: string;
-      body: {
-        text: string;
-      }[];
-      count: number;
-    }[];
-  };
-}
-
-interface PostProps {
-  post: Post;
-  sugestions: {
-    prevPost?: {
-      uid: string;
-      data: {
-        title: string;
-      };
-    }[];
-    nextPost?: {
-      uid: string;
-      data: {
-        title: string;
-      };
-    }[];
-  };
-}
-
-export default function Post({ post, sugestions }: PostProps): JSX.Element {
+export default function Post({
+  post,
+  sugestions,
+}: prismicResponseProps): JSX.Element {
   const router = useRouter();
 
   const totalWords = post.data.content.reduce((total, contentItem) => {
