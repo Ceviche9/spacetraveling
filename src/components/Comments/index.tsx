@@ -23,7 +23,6 @@ export type CommentsProps = {
 };
 
 const Comments = ({ sugestions }: CommentsProps): JSX.Element => {
-  console.log('Teste', sugestions);
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://utteranc.es/client.js';

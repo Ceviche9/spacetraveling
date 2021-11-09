@@ -19,36 +19,22 @@ import { setTimeout } from 'timers';
 import { getPrismicClient } from '../services/prismic';
 import { Loading } from '../components/Loading';
 
+import {
+  HomeProps,
+  PostPaginationProps,
+  PostProps,
+} from '../protocols/homeProtocols';
+
 import styles from './home.module.scss';
-
-type Post = {
-  uid?: string;
-  first_publication_date: string | null;
-  data: {
-    title: string;
-    subtitle: string;
-    author: string;
-  };
-};
-
-type PostPagination = {
-  next_page: string;
-  results: Post[];
-};
-
-type HomeProps = {
-  postsPagination: PostPagination;
-};
 
 export default function Home({ postsPagination }: HomeProps): JSX.Element {
   const { next_page, results } = postsPagination;
-  const [posts, setPosts] = useState<Post[]>(results);
+  const [posts, setPosts] = useState<PostProps[]>(results);
   const [nextPage, setNextPage] = useState<string>(next_page);
   const [showLoading, setShowLoading] = useState(false);
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const notifyError = (err: string) => {
-    console.log('fui chamado');
     toast.error(err, {
       position: 'top-right',
       autoClose: 5000,
@@ -66,8 +52,8 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
       if (nextPage) {
         try {
           const response = fetch(nextPage);
-          const data: Promise<PostPagination> = (await response).json();
-          const newPosts = (await data).results.map((post: Post) => ({
+          const data: Promise<PostPaginationProps> = (await response).json();
+          const newPosts = (await data).results.map((post: PostProps) => ({
             uid: post.uid,
             first_publication_date: format(
               new Date(post.first_publication_date),
