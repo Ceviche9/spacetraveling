@@ -87,7 +87,7 @@ export default function Post({
               <Clock /> {`${readTime} min`}
             </p>
           </div>
-          <span>{lastPublicationDate}</span>
+          {lastPublicationDate ? <span>{lastPublicationDate}</span> : null}
           <div className={styles.postContent}>
             <p>{post.data.subtitle}</p>
             {post.data.content.map(postContent => (
@@ -142,7 +142,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: 'blocking', // TODO: ao deixar como true dá erro na build.
+    fallback: 'blocking',
   };
 };
 

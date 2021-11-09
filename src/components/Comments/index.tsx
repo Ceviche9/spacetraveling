@@ -1,26 +1,7 @@
-/* eslint-disable consistent-return */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable class-methods-use-this */
 import { useEffect } from 'react';
+import { CommentsProps } from '../../protocols/CommentsProtocols';
 
 const commentNodeId = 'comments';
-
-export type CommentsProps = {
-  sugestions: {
-    prevPost?: {
-      uid: string;
-      data: {
-        title: string;
-      };
-    }[];
-    nextPost?: {
-      uid: string;
-      data: {
-        title: string;
-      };
-    }[];
-  };
-};
 
 const Comments = ({ sugestions }: CommentsProps): JSX.Element => {
   useEffect(() => {
@@ -35,7 +16,6 @@ const Comments = ({ sugestions }: CommentsProps): JSX.Element => {
     const scriptParentNode = document.getElementById(commentNodeId);
     scriptParentNode.appendChild(script);
     return () => {
-      // cleanup - remove the older script with previous theme
       scriptParentNode.removeChild(scriptParentNode.firstChild);
     };
   }, [sugestions]);
