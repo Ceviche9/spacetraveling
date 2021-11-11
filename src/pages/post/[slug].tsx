@@ -177,10 +177,15 @@ export const getStaticProps: GetStaticProps = async context => {
     };
   });
 
+  const lastPublicationDate =
+    response.last_publication_date === response.first_publication_date
+      ? null
+      : response.last_publication_date;
+
   const post = {
     uid: response.uid,
     first_publication_date: response.first_publication_date,
-    last_publication_date: response.last_publication_date,
+    last_publication_date: lastPublicationDate,
     data: {
       title: response.data.title,
       subtitle: response.data.subtitle,
