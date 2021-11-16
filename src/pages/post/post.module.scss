@@ -61,6 +61,15 @@
     margin: 1.5rem 0;
   }
 
+  a {
+    color: var(--Link);
+    transition: filter 1.5s;
+    &:hover {
+      filter: brightness(0.8);
+      text-decoration: underline;
+    }
+  }
+
   ul {
     padding-left: 1.5rem;
 
