@@ -152,7 +152,7 @@ export const getStaticProps: GetStaticProps = async context => {
   const prismic = getPrismicClient();
   const response = await prismic.getByUID('post', String(slug), {});
 
-  const nextPost = await prismic.query(
+  const prevPost = await prismic.query(
     [Prismic.Predicates.at('document.type', 'post')],
     {
       pageSize: 1,
@@ -161,12 +161,12 @@ export const getStaticProps: GetStaticProps = async context => {
     }
   );
 
-  const prevPost = await prismic.query(
+  const nextPost = await prismic.query(
     [Prismic.Predicates.at('document.type', 'post')],
     {
       pageSize: 1,
       after: response.id,
-      orderings: '[document.last_publication_date desc]',
+      orderings: '[document.first_publication_date desc]',
     }
   );
 
