@@ -14,17 +14,15 @@ O projeto tem como objetivo o estudo e desenvolvimento de uma aplicação em Rea
 
 ![image](https://user-images.githubusercontent.com/83431609/140818662-c6eedbb8-055e-4496-b061-a80a87860159.png)
 
+No final de cada post tem um espaço para comentários, que foi feito utilizando a biblioteca [utterances](https://github.com/utterance/utterances)
+
+![image](https://user-images.githubusercontent.com/83431609/140819150-bb41755d-e031-4c45-83bb-b4a91e3a698e.png)
+
 Link do [Projeto](https://spacetraveling-tun.vercel.app/)
 
 Link do [desafio](https://www.notion.so/Desafio-01-Criando-um-projeto-do-zero-b1a3645d286b4eec93f5f1f5476d0ff7)
 
 Link do [desafio complementar](https://www.notion.so/Desafio-02-Adicionando-features-ao-blog-d466866c02544c79bbada9717c033d0a)
-
-No final de cada post tem um espaço para comentários, que foi feito utilizando a biblioteca [utterances](https://github.com/utterance/utterances)
-
-![image](https://user-images.githubusercontent.com/83431609/140819150-bb41755d-e031-4c45-83bb-b4a91e3a698e.png)
-
-
 
 ## 💻 O que tem no projeto?
 
