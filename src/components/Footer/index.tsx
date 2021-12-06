@@ -6,7 +6,7 @@ import styles from './footer.module.scss';
 export default function Footer(): JSX.Element {
   return (
     <footer className={styles.container}>
-      <Link href="https://github.com/Ceviche9">
+      <Link href="https://tunde-dev.vercel.app/">
         <a>Made by Tundê Cavalcante</a>
       </Link>
       <div>
