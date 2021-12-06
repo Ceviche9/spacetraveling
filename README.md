@@ -33,7 +33,7 @@ Link do [desafio complementar](https://www.notion.so/Desafio-02-Adicionando-feat
 
 ## 🏃🏾 Testes
 
-Para está completo, o projeto deve passar pelos seguintes testes quando é entregue na plataforma da rocketseat:
+Para estar completo, o projeto deve passar pelos seguintes testes quando é entregue na plataforma da rocketseat:
 
 - [x] Header should be able to render logo
 - [x] Header should be able to navigate to home page after a click
